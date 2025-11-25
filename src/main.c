@@ -5,86 +5,18 @@
  *  Author: Nestor
  */ 
 
-#define F_CPU 8000000UL
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-#include "dimmer_defs.h"
-
-unsigned int timeAngle = 0;
-
-unsigned char segundos = 0, minutos = 30, horas = 12;
-			 
-char display = 0,
-     div,
-	 var=0,
-	 unidade,
-	 dezena;
-			  
-void convertVariavel(unsigned int v);
-
-
-
-ISR(TIMER2_OVF_vect)
-{
-	segundos++;
-	if(segundos == 60){
-		segundos = 0;
-		minutos++;
-		if(minutos == 60){
-			minutos = 0;
-			horas++;
-			if(horas == 24){
-				horas = 0;
-			}
-		}
-	}
-}
-
-ISR(TIMER1_COMPA_vect)
-{
-	switch(display)
-	{
-		case 0:
-			PORTB &= ~_BV(_enable_dez);
-			PORTB &= ~_BV(_dado00) & ~_BV(_dado01) & ~_BV(_dado02) & ~_BV(_dado03);
-			PORTB |= _BV(_enable_uni);
-			PORTB |= unidade;
-			display = 1;
-			break;
-		case 1:
-			PORTB &= ~_BV(_enable_uni);
-			PORTB &= ~_BV(_dado00) & ~_BV(_dado01) & ~_BV(_dado02) & ~_BV(_dado03);
-			PORTB |= _BV(_enable_dez);
-			PORTB |= dezena;
-			display = 0;
-			break;
-	}
-}
-			 
-ISR(INT0_vect)
-{
-	TIMSK0 = _BV(OCIE0A);				//Habilita a interrupção de CTC do timer/counter0
-}
-
- ISR(TIMER0_COMPA_vect)
-{
-	timeAngle++;
-	if(timeAngle >= var){
-		TIMSK0 &= ~(1<<OCIE0A);			//Desabilita a interrupção de overflow do timer/counter0
-		PORTD |= _BV(PD4);				//Pulso no ino de disparo do moc
-		_delay_us(15);
-		PORTD &= ~_BV(PD4);
-		timeAngle = 0;					
-	}
-}
-
+#include "dimmer_digital/dimmer_defs.h"
+#include "dimmer_digital/dimmer_helper.h"
 
 int main(void)
 {
-	unsigned int contTec = 0,
-				 contTecRapido = 0;
+	unsigned int contTec = 0;
+  unsigned int contTecRapido = 0;
 	
 	//////////////////////////////////////////////////////////////////////////////////
 	//configura o PortD.2 como entrada com o resistor de pull-up ativo
@@ -103,10 +35,10 @@ int main(void)
 	ASSR = 1 << AS2;
 	
 	//prescaler = 128, resultando em um estouro a cada 1s					
-	TCCR2 = (1 << CS22) | (1 << CS20);	
+	TCCR2A = (1 << CS22) | (1 << CS20);	
 	
 	//habilita a interrupção do timer 2
-	TIMSK |= 1 << TOIE2;				
+	TIMSK0 |= 1 << TOIE2;				
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//prescale do timer/counter0 8
@@ -220,15 +152,4 @@ int main(void)
 			contTec = 0;
 		}
 	}
-}
-
-
-
-void convertVariavel(unsigned int v)
-{
-	unidade = v%10;
-	div = v/10;
-	dezena = div%10;
-	dezena = dezena << 2;
-	unidade = unidade << 2;
 }

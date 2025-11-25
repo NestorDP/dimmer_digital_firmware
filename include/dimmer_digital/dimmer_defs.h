@@ -1,3 +1,6 @@
+#ifndef DIMMER_DEFS_H
+#define DIMMER_DEFS_H
+
 #define _chave02 6
 #define _chave01 7
 
@@ -22,3 +25,16 @@
 
 #define RTC_desliga		TIMSK &= ~(1 << TOIE2)
 #define RTC_liga		TIMSK |= (1 << TOIE2)
+
+extern unsigned int timeAngle;
+extern unsigned char segundos;
+extern unsigned char minutos;
+extern unsigned char horas;
+
+extern char display;
+extern char divis;
+extern char var;
+extern char unidade;
+extern char dezena;
+
+#endif
