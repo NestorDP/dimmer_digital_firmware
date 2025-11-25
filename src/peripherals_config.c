@@ -29,15 +29,19 @@ void configIntExternal(void)
 }
 
 void configRtc(void){
-  //Habilita o cristal externo para o RTC
+  //Habilita o cristal externo para o RTC with 32.768kHz crystal
 	ASSR = 1 << AS2;
 }
 
 void configIntOverflowTimer2(void)
 {
-  //prescaler = 128, resultando em um estouro a cada 1s					
+  // prescaler = 128
+  // clk = 32.768kHz crystal
+  // clk/128 = 256Hz
+  // 1/256Hz = 3.90625ms por incremento
+  // 256 * 3.90625ms = 1s
 	TCCR2A = (1 << CS22) | (1 << CS20);	
-	
+
 	//habilita a interrupção do timer 2
 	TIMSK2 |= _BV(TOIE2);		
 }

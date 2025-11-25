@@ -1,3 +1,7 @@
+PROGRAMMER 	 = usbasp
+PORT       	 = usb
+PROG_MCU   	 = m328p	
+AVRDUDE    	 = avrdude -c $(PROGRAMMER) -p $(PROG_MCU) -P $(PORT)
 
 F_CPU        = 8000000
 MCU          = atmega328p
@@ -47,7 +51,13 @@ size:
 clean :
 	rm -rf $(OBJ_DIR) $(ELF_IMAGE) $(TARGET_IMAGE)
 
-avrdude: $(TARGET_IMAGE)
-	avrdude -c usbasp -p m328p -P usb -U flash:w:$(TARGET_IMAGE):i
+flash: $(TARGET_IMAGE)
+	$(AVRDUDE) -U flash:w:$(TARGET_IMAGE):i
 
-.PHONY : all size clean avrdude
+fuses:
+	$(AVRDUDE) -U lfuse:w:0xE2:m -U hfuse:w:0xD9:m -U efuse:w:0xFF:m
+
+program: fuses flash
+
+
+.PHONY : all size clean flash fuses program
