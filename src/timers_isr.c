@@ -41,11 +41,6 @@ ISR(TIMER1_COMPA_vect)
     }
 }
 
-ISR(INT0_vect)
-{
-    TIMSK0 = _BV(OCIE0A);                // Enable CTC interrupt for timer0
-}
-
 ISR(TIMER0_COMPA_vect)
 {
     timeAngle++;
@@ -57,3 +52,10 @@ ISR(TIMER0_COMPA_vect)
         timeAngle = 0;
     }
 }
+
+
+ISR(INT0_vect)
+{
+    TIMSK0 = _BV(OCIE0A);                // Enable CTC interrupt for timer0
+}
+

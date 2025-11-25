@@ -1,5 +1,5 @@
 
-F_CPU        = 16000000
+F_CPU        = 8000000
 MCU          = atmega328p
 
 ELF_IMAGE    = image.elf
