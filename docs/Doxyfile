@@ -1,0 +1,35 @@
+# Doxyfile 1.8.0 -- minimal configuration for this project
+
+PROJECT_NAME           = "dimmer_digital_firmware"
+PROJECT_BRIEF          = "Simple AVR dimmer firmware"
+PROJECT_NUMBER         = ""
+
+OUTPUT_DIRECTORY       = ./doxygen
+CREATE_SUBDIRS         = NO
+
+INPUT                  = src include README.md
+RECURSIVE              = YES
+FILE_PATTERNS          = *.c *.h
+EXCLUDE                = 
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
+
+GENERATE_TREEVIEW      = YES
+
+OPTIMIZE_OUTPUT_FOR_C  = YES
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+
+QUIET                  = NO
+WARNINGS               = YES
+
+INPUT_ENCODING         = UTF-8
+STRIP_FROM_PATH        = .
+
+GENERATE_XML           = NO

@@ -2,7 +2,7 @@
 #include "dimmer_digital/dimmer_helper.h"
 #include "dimmer_digital/dimmer_defs.h"
 
-void convertVariavel(unsigned int v)
+void convertVariable(unsigned int v)
 {
 	unidade = v%10;
 	divis = v/10;

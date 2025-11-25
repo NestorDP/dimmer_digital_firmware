@@ -1,0 +1,19 @@
+/** \mainpage dimmer_digital_firmware
+
+\section intro_sec Introduction
+
+This documentation is generated from the source files in this repository using Doxygen.
+It covers the firmware for a simple AVR-based dimmer device. The docs include an index
+of source files, documented functions, and a tree view of the code.
+
+\section build_sec Generating the documentation
+
+Instructions to generate the documentation are provided in `docs/README.md`.
+
+\section notes_sec Notes
+
+- The Doxygen configuration is at the project root (`Doxyfile`).
+- The `INPUT` directory includes `src/` and `include/` so comments in `.c` and `.h` files
+  will be picked up automatically.
+
+*/
