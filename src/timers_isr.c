@@ -6,18 +6,18 @@
 
 ISR(TIMER2_OVF_vect)
 {
-    seconds++;
-    if(seconds == 60){
-        seconds = 0;
-        minutes++;
-        if(minutes == 60){
-            minutes = 0;
-            hours++;
-            if(hours == 24){
-                hours = 0;
-            }
-        }
-    }
+	seconds++;
+	if(seconds == 60){
+		seconds = 0;
+		minutes++;
+		if(minutes == 60){
+			minutes = 0;
+			hours++;
+			if(hours == 24){
+				hours = 0;
+			}
+		}
+	}
 }
 
 ISR(TIMER1_COMPA_vect)
@@ -44,10 +44,14 @@ ISR(TIMER0_COMPA_vect)
 {
 	sinoaidal_phase_trigger++;
 	if(sinoaidal_phase_trigger >= var){
-		TIMSK0 &= ~(1<<OCIE0A);         // Disable timer0 compare interrupt
-		PORTD |= _BV(PD4);              // Pulse moc trigger
+		// Disable timer0 compare interrupt
+		TIMSK0 &= ~(1<<OCIE0A);
+
+		// Pulse moc trigger        
+		PORTD |= _BV(PD4);              
 		_delay_us(15);
 		PORTD &= ~_BV(PD4);
+		
 		sinoaidal_phase_trigger = 0;
 	}
 }
@@ -55,6 +59,7 @@ ISR(TIMER0_COMPA_vect)
 
 ISR(INT0_vect)
 {
-    TIMSK0 = _BV(OCIE0A);                // Enable CTC interrupt for timer0
+	// Enable CTC interrupt for timer0
+	TIMSK0 = _BV(OCIE0A);
 }
 
