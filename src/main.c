@@ -20,7 +20,7 @@ int main(void)
   unsigned int cont_tec_rapido = 0;
 
 	configPeripherals();	
-	convertVariable(var);
+	convertVariable(dimmer_value_percent);
 	
 	while (1)
 	{ 
@@ -31,13 +31,13 @@ int main(void)
 			_delay_ms(20);
       
       //incrementa variável do display
-			var++;
+			dimmer_value_percent++;
 
       //atribue um valor máximo para a variável
-			if_value_max(99);
+			if_value_max(99, dimmer_value_percent);
 
       //quebra a variável em unit e dozen para o display 7 segmentos
-			convertVariable(var);
+			convertVariable(dimmer_value_percent);
 
       //enquanto a chave tiver precionada incrementa a variável
 			while(bit_is_clear(PIND, _chave01)) {
@@ -45,9 +45,9 @@ int main(void)
 				if(cont_tec_rapido < NUM_VEZES_LENTO) {	
           //testa se já passo o tempo para incrmento lento	
 					if(cont_tec >= TEMPO_INCREMENTO_LENTO) {	
-						var++;					
-						if_value_max(99);
-						convertVariable(var);
+						dimmer_value_percent++;					
+						if_value_max(99, dimmer_value_percent);
+						convertVariable(dimmer_value_percent);
 
             //incrementa a variável para mudança de lento para rápido
 						cont_tec_rapido++;
@@ -60,9 +60,9 @@ int main(void)
 				else{
           //testa se já passou o tempo para incremento rápido
 					if(cont_tec >= TEMPO_INCREMENTO_RAPIDO){
-						var++;
-						if_value_max(99);
-						convertVariable(var);
+						dimmer_value_percent++;
+						if_value_max(99, dimmer_value_percent);
+						convertVariable(dimmer_value_percent);
 
             //zera variável do tempo do teclado
 						cont_tec = 0;
@@ -83,16 +83,16 @@ int main(void)
 		if (bit_is_clear(PIND, _chave02))
 		{
 			_delay_ms(20);
-			if_value_min(1);
-			var--;
-			convertVariable(var);
+			if_value_min(1, dimmer_value_percent);
+			dimmer_value_percent--;
+			convertVariable(dimmer_value_percent);
 			while(bit_is_clear(PIND, _chave02))
 			{
 				if(cont_tec_rapido < NUM_VEZES_LENTO){
 					if(cont_tec >= TEMPO_INCREMENTO_LENTO){
-						if_value_min(1);
-						var--;
-						convertVariable(var);
+						if_value_min(1, dimmer_value_percent);
+						dimmer_value_percent--;
+						convertVariable(dimmer_value_percent);
 
             //incrementa a variável para mudança de lento para rápido
 						cont_tec_rapido++;
@@ -103,9 +103,9 @@ int main(void)
 				}
 				else{
 					if(cont_tec >= TEMPO_INCREMENTO_RAPIDO){
-						if_value_min(1);
-						var--;
-						convertVariable(var);
+						if_value_min(1, dimmer_value_percent);
+						dimmer_value_percent--;
+						convertVariable(dimmer_value_percent);
             
             //zera variável do tempo do teclado
 						cont_tec = 0;
@@ -117,7 +117,7 @@ int main(void)
 
       //reinicia a variável para mudança de lento para rápido
 			cont_tec_rapido = 0;
-      
+
       //reinicia a variável para contar o tempo dos incremento do teclado
 			cont_tec = 0;
 		}

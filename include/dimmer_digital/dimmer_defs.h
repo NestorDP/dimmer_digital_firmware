@@ -20,8 +20,8 @@
 #define TEMPO_INCREMENTO_LENTO	600
 #define TEMPO_INCREMENTO_RAPIDO 65
 
-#define if_value_min(a)		if(var <= 1) var = a
-#define if_value_max(a)		if(var >= 99) var = a
+#define if_value_min(a, b)		if(b <= 1) b = a
+#define if_value_max(a, b)		if(b >= 99) b = a
 
 #define RTC_desliga		TIMSK &= ~(1 << TOIE2)
 #define RTC_liga		TIMSK |= (1 << TOIE2)
@@ -33,8 +33,7 @@ extern unsigned char minutes;
 extern unsigned char hours;
 
 extern char display;
-extern char var;
 extern char unit;
 extern char dozen;
-
+extern char dimmer_value_percent;
 #endif

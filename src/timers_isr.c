@@ -43,7 +43,7 @@ ISR(TIMER1_COMPA_vect)
 ISR(TIMER0_COMPA_vect)
 {
 	sinoaidal_phase_trigger++;
-	if(sinoaidal_phase_trigger >= var){
+	if(sinoaidal_phase_trigger >= dimmer_value_percent){
 		// Disable timer0 compare interrupt
 		TIMSK0 &= ~(1<<OCIE0A);
 
@@ -51,7 +51,7 @@ ISR(TIMER0_COMPA_vect)
 		PORTD |= _BV(PD4);              
 		_delay_us(15);
 		PORTD &= ~_BV(PD4);
-		
+
 		sinoaidal_phase_trigger = 0;
 	}
 }
