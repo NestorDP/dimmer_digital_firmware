@@ -41,11 +41,11 @@ void configRtc(void){
 
 void configIntOverflowTimer2(void)
 {
-  // prescaler = 128
-  // clk = 32.768kHz crystal (RTC enabled)
-  // clk/128 = 256Hz
-  // 1/256Hz = 3.90625ms per increment
-  // 256 * 3.90625ms = 1s
+	// prescaler = 128
+	// clk = 32.768kHz crystal (RTC enabled)
+	// clk/128 = 256Hz
+	// 1/256Hz = 3.90625ms per increment
+	// 256 * 3.90625ms = 1s
 	TCCR2A = (1 << CS22) | (1 << CS20);	
 
 	// Enable timer 2 overflow interrupt
@@ -59,8 +59,10 @@ void configIntCompareMatchTimer0(void)
   // Timer/counter 0 prescale 8
 	// TCCR0B – Timer/Counter Control Register B
 	// Bits 2:0 – CS02:0: Clock Select
+	// clk = 8000000Hz
+	// clk/8 = 1000000Hz
+	// 1/1000000Hz = 1us per increment
 	TCCR0B |= _BV(CS01);
-	
 
 	// Clear timer on compare match (CTC) mode
 	// TCCR0A – Timer/Counter Control Register A
@@ -73,12 +75,7 @@ void configIntCompareMatchTimer0(void)
 	
 	// Load the count value into the Output Compare Register 0 A
 	// OCR0A – Output Compare Register A 0
-	OCR0A = 79;
-
-  // Enable timer0 compare match interrupt
-	// TIMSK0 – Timer/Counter Interrupt Mask Register
-	// Bit 1 – OCIE0A: Timer/Counter0 Output Compare Match A Interrupt Enable
-  TIMSK0 |= _BV(OCIE0A);
+	OCR0A = 79; // 80us
 }
 
 void configIntCompareMatchTimer1(void)

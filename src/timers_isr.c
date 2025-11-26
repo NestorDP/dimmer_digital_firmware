@@ -56,7 +56,6 @@ ISR(TIMER0_COMPA_vect)
 	}
 }
 
-
 ISR(INT0_vect)
 {
 	// Enable CTC interrupt for timer0
