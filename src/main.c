@@ -29,7 +29,7 @@ int main(void)
 			_delay_ms(20);									//espera passar o bounce 
 			var++;											//incrementa variável do display
 			if_value_max(99);								//atribue um valor máximo para a variável
-			convertVariable(var);							//quebra a variável em unidade e dezena para o display 7 seg
+			convertVariable(var);							//quebra a variável em unit e dozen para o display 7 seg
 			while(bit_is_clear(PIND, _chave01))				//enquanto a chave tiver precionada incrementa a variável
 			{
 				if(contTecRapido < NUM_VEZES_LENTO){		//testa quantas vezes a var foi incrementada sem ser solta

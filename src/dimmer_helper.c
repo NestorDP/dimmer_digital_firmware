@@ -4,9 +4,9 @@
 
 void convertVariable(unsigned int v)
 {
-	unidade = v%10;
+	unit = v%10;
 	divis = v/10;
-	dezena = divis%10;
-	dezena = dezena << 2;
-	unidade = unidade << 2;
+	dozen = divis%10;
+	dozen = dozen << 2;
+	unit = unit << 2;
 }

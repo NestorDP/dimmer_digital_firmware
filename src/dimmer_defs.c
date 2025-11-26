@@ -1,12 +1,12 @@
 #include "dimmer_digital/dimmer_defs.h"
 
-unsigned int timeAngle = 0;
-unsigned char segundos = 0;
-unsigned char minutos = 30;
-unsigned char horas = 12;
+unsigned int sinoaidal_phase_trigger = 0;
+unsigned char seconds = 0;
+unsigned char minutes = 30;
+unsigned char hours = 12;
 
 char display = 0;
 char divis = 0;
 char var = 0;
-char unidade = 0;
-char dezena = 0;
+char unit = 0;
+char dozen = 0;

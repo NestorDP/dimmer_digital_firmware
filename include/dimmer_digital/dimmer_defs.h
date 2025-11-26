@@ -26,15 +26,16 @@
 #define RTC_desliga		TIMSK &= ~(1 << TOIE2)
 #define RTC_liga		TIMSK |= (1 << TOIE2)
 
-extern unsigned int timeAngle;
-extern unsigned char segundos;
-extern unsigned char minutos;
-extern unsigned char horas;
+// sinoidal phase trigger
+extern unsigned int sinoaidal_phase_trigger;
+extern unsigned char seconds;
+extern unsigned char minutes;
+extern unsigned char hours;
 
 extern char display;
 extern char divis;
 extern char var;
-extern char unidade;
-extern char dezena;
+extern char unit;
+extern char dozen;
 
 #endif
