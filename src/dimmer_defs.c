@@ -6,7 +6,6 @@ unsigned char minutes = 30;
 unsigned char hours = 12;
 
 char display = 0;
-char divis = 0;
 char var = 0;
 char unit = 0;
 char dozen = 0;

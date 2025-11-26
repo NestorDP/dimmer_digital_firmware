@@ -33,7 +33,6 @@ extern unsigned char minutes;
 extern unsigned char hours;
 
 extern char display;
-extern char divis;
 extern char var;
 extern char unit;
 extern char dozen;
