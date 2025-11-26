@@ -7,7 +7,7 @@ PROJECT_NUMBER         = ""
 OUTPUT_DIRECTORY       = ./doxygen
 CREATE_SUBDIRS         = NO
 
-INPUT                  = src include README.md
+INPUT                  = ../src ../include ../README.md
 RECURSIVE              = YES
 FILE_PATTERNS          = *.c *.h
 EXCLUDE                = 
